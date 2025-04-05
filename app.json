@@ -22,7 +22,7 @@
       "description": "true or false",
       "required": false
     } ,
-    "AUTO_STATUS_READ": {
+    "AUTO_STATUS_SEEN": {
       "description": "true or false",
       "required": false
     } 
