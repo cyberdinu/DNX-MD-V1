@@ -1,115 +1,37 @@
 {
   "name": "DNX-MD",
-  "description": "I am DNX-MD WhatsApp MultiDevice Bot built in NodeJs to enhance the experience.",
-  "logo": "https://i.ibb.co/MDDgqwXc/8600.jpg",
+  "description": "Javascript WhatsApp bot",
+  "logo": "https://github.com/DNX-MD-V1/DNX-MD-V1",
   "keywords": ["DNX-MD"],
-  "repository": "https://github.com/DNX-MD-V1/DNX-MD-V1",
-  "stack": "container",
-  "env": { 
-      "SESSION_ID": {
-      "description": "your session id",
-      "required": true,
-      "value": ""
-    },
-    "MODE": {
-      "description": "mode public or self",
-      "required": true,
-      "value": "public"
-    },
-    "BOT_NAME": {
-      "description": "change bot name what you want!",
-      "required": false,
-      "value": "DNX-MD"
-    },
-    "MENU_IMAGE": {
-      "description": "change menu image if want otherwise use default",
-      "required": false,
-      "value": "https://i.ibb.co/MDDgqwXc/8600.jpg"
-    },
-    "DESCRIPTION": {
-      "description": "add caption for menu and etc",
-      "required": false,
-      "value": "© ᴘᴏᴡᴇʀᴇᴅ ʙʏ LOD TEAM"
-    },
-    "ANTI_DELETE": {
-      "description": "make it true for use anti delete",
-      "required": true,
-      "value": "true"
-    },
-    "AUTO_STATUS_SEEN": {
-      "description": "make it true if you want bot to view status",
-      "required": false,
-      "value": "true"
-    },
-    "AUTO_STATUS_REPLY": {
-      "description": "make it true if you want to send message after seen status",
-      "required": false,
-      "value": "false"
-    },
-    "STATUS_READ_MSG": {
-      "description": "set your status reply message",
-      "required": false,
-      "value": "*STUTAS SEEN BY DNX-MD ☠️*"
-    },
-    "OWNER_NAME": {
-      "description": "set your status reply message",
-      "required": false,
-      "value": "CYBER DINU ID"
-    },
-    "OWNER_NUMBER": {
-      "description": "set your status reply message",
-      "required": false,
-      "value": "947649xxxxx"
-    },
-    "AUTO_READ": {
-      "description": "make it true if you want bot to read message",
-      "required": false,
-      "value": "false"
-    },
-    "AUTO_TYPING": {
-      "description": "make it true if you want bot to show typing",
-      "required": false,
-      "value": "false"
-    },
-    "AUTO_RECORDING": {
-      "description": "make it true if you want bot to show recording audio",
-      "required": false,
-      "value": "false"
-    },
-    "ALWAYS_ONLINE": {
-      "description": "make it true if you want bot to show always online",
-      "required": false,
-      "value": "false"
-    },
-    "AUTO_BLOCK": {
-      "description": "make it true if you want bot to auto block only 212 numbers",
-      "required": false,
-      "value": "false"
-    },
-    "REJECT_CALL": {
-      "description": "make it true if you want to reject call",
-      "required": false,
-      "value": "false"
-    },
-    "PREFIX": {
-      "description": "Your Bot Prefix default (.)",
-      "required": false,
-      "value": "."
-    }
-    },
-    "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    },
-    {
-      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
-    },
-    {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-    },
-    {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    }
-  ]
-}
+  "success_url": "/",
 
+  "env": {
+    "SESSION_ID": {
+      "description": "Put the session-id here.",
+      "required": true
+    },
+ "REJECT_CALL": {
+      "description": "true or false",
+      "required": false
+    },
+"MODE": {
+      "description": "public or private",
+      "required": false
+    } ,
+"AUTO_RECORDING": {
+      "description": "true or false",
+      "required": false
+    } ,
+    "AUTO_STATUS_READ": {
+      "description": "true or false",
+      "required": false
+    } 
+},
+
+     "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+        }
+     ],
+  "stack": "heroku-24"
+}
