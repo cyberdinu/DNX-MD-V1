@@ -28,7 +28,7 @@ const facebook = async (m, Matrix) => {
       return Matrix.sendMessage(m.from, { text: "⚠️ *No downloadable video found.*" }, { quoted: m });
     }
 
-    const caption = `📹 *Facebook Video*\n\n🎬 *Title:* ${title}\n📥 *Quality:* ${bestQuality.quality}\n\n🔗 *Powered By JawadTechX ✅*`;
+    const caption = `📹 *Facebook Video*\n\n🎬 *Title:* ${title}\n📥 *Quality:* ${bestQuality.quality}\n\n🔗 *Powered By LOD TEAM ✅*`;
 
     await Matrix.sendMessage(m.from, {
       video: { url: bestQuality.downloadUrl },
