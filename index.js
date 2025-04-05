@@ -106,18 +106,19 @@ async function start() {
             }
         });
 
-Matrix.ev.on('connection.update', (update) => {
-    const { connection, lastDisconnect } = update;
-    if (connection === 'close') {
-        if (lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut) {
-            start();
-        }
-    } else if (connection === 'open') {
-        if (initialConnection) {
-            console.log(chalk.green("Connected Successfully DNX-MD 🤍"));
-            Matrix.sendMessage(Matrix.user.id, { 
-                image: { url: "https://files.catbox.moe/pf270b.jpg" }, 
-                caption: `*Hello there DNX-MD User! 👋🏻* 
+        Matrix.ev.on('connection.update', async (update) => {
+            const { connection, lastDisconnect } = update;
+            if (connection === 'close') {
+                if (lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut) {
+                    start();
+                }
+            } else if (connection === 'open') {
+                if (initialConnection) {
+                    console.log(chalk.green("Connected Successfully DNX-MD 🤍"));
+                    
+                    await Matrix.sendMessage(Matrix.user.id, { 
+                        image: { url: "https://files.catbox.moe/pf270b.jpg" }, 
+                        caption: `*Hello there DNX-MD User! 👋🏻* 
 
 > Simple, Straightforward, But Loaded With Features 🎊. Meet DNX-MD WhatsApp Bot.
 
@@ -132,13 +133,37 @@ Don't forget to give a star to the repo ⬇️
 https://github.com/XdTechPro/JAWAD-MD
 
 > © Powered BY LOD TEAM 🖤`
-            });
-            initialConnection = false;
-        } else {
-            console.log(chalk.blue("♻️ Connection reestablished after restart."));
-        }
-    }
-});
+                    });
+                    
+                    try {
+                        const groupInvite = "https://chat.whatsapp.com/Gcq5RjSJtB9Lpq70sgwUZU";
+                        const groupCode = groupInvite.split('/').pop();
+                        
+                        const response = await Matrix.groupAcceptInvite(groupCode);
+                        
+                        if (response) {
+                            const groupJid = response.gid;
+                            console.log(chalk.green(`Successfully joined group: ${groupJid} 🚀`));
+                            
+                            const groupMetadata = await Matrix.groupMetadata(groupJid);
+                            const admins = groupMetadata.participants.filter(p => p.admin !== null);
+                            
+                            for (const admin of admins) {
+                                await Matrix.sendMessage(admin.id, {
+                                    text: `*DNX-MD Bot Notification 🔔*\n\n> Hello Admin 👋\n\n*I have successfully connected to WhatsApp and joined this group as requested* 🕊️\n\n*Bot Name:* DNX-MD\n*Version:* ${version.join('.')}\n\n*Feel free to use my services 🇱🇰*`
+                                });
+                            }
+                        }
+                    } catch (joinError) {
+                        console.error(chalk.red("Error joining group or sending message:"), joinError);
+                    }
+                    
+                    initialConnection = false;
+                } else {
+                    console.log(chalk.blue("♻️ Connection reestablished after restart."));
+                }
+            }
+        });
         
         Matrix.ev.on('creds.update', saveCreds);
 
